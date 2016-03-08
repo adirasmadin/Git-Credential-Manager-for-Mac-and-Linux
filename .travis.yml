@@ -2,12 +2,12 @@ addons:
   apt: {packages: null}
   artifacts:
     debug: true
-    paths: [libs.zip, build.zip]
-    target_paths: 8db70c47-7f86-40e5-8fee-379af4fa55e7
+    paths: [libs.zip, build.zip, testbuild.zip]
+    target_paths: b1782fc5-f5b2-4669-af89-9dec23f34fd5
 install: mvn compile org.apache.maven.plugins:maven-dependency-plugin:2.10:go-offline
   --batch-mode --show-version
 jdk: [openjdk6]
 language: java
 script: ['export PATH="bin:$PATH"', mvn clean verify --batch-mode, ./df-build.sh]
 sudo: false
-# Modified by Insights Service at 2016-03-08 14:31:23.543385
+# Modified by Insights Service at 2016-03-08 20:42:31.900009
