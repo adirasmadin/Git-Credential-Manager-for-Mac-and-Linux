@@ -3,11 +3,11 @@ addons:
   artifacts:
     debug: true
     paths: [libs.zip, build.zip, testbuild.zip]
-    target_paths: fad32ae1-6267-46b4-b92c-fb5f983859a5
+    target_paths: 7a44a5ef-57d8-435a-9584-11d470abcfe7
 install: mvn compile org.apache.maven.plugins:maven-dependency-plugin:2.10:go-offline
   --batch-mode --show-version
 jdk: [openjdk6]
 language: java
 script: ['export PATH="bin:$PATH"', mvn clean verify --batch-mode, ./df-build.sh]
 sudo: false
-# Modified by Insights Service at 2016-03-13 08:48:19.231443
+# Modified by Insights Service at 2016-03-13 09:14:18.081141
