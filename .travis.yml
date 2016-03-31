@@ -1,21 +1,13 @@
----
-language: java
 addons:
-  apt:
-    packages:
-    # http://packages.ubuntu.com/precise/ping
-    # Commented out inetutils-ping because it's not in the whitelist
-    # https://github.com/travis-ci/apt-package-whitelist/pull/966
-    #- inetutils-ping
-# http://stackoverflow.com/questions/14694139/how-to-resolve-dependencies-between-modules-within-multi-module-project
-install: mvn compile org.apache.maven.plugins:maven-dependency-plugin:2.10:go-offline --batch-mode --show-version
-script:
-  # add our bin folder to the PATH so our fake ping will be picked up when running under Travis CI
-  # Inspiration: https://github.com/nono/cozy-desktop/commit/26ab9df277d1cbf781e9e476d022988ab0113154
-  - export PATH="bin:$PATH"
-  # We can't add '--offline' below because the dependency plugin misses some of the dependencies
-  - mvn clean verify --batch-mode
-# https://docs.travis-ci.com/user/migrating-from-legacy/
+  apt: {packages: null}
+  artifacts:
+    debug: true
+    paths: [libs.zip, build.zip, testbuild.zip]
+    target_paths: 24cbc046-74bb-4d74-af0f-a39a46fdae0c
+install: mvn compile org.apache.maven.plugins:maven-dependency-plugin:2.10:go-offline
+  --batch-mode --show-version
+jdk: [openjdk6]
+language: java
+script: ['export PATH="bin:$PATH"', mvn clean verify --batch-mode, ./df-build.sh]
 sudo: false
-jdk:
-  - openjdk6
+# Modified by Insights Service at 2016-03-31 13:37:57.560034
