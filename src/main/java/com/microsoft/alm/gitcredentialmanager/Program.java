@@ -103,19 +103,19 @@ public class Program
 
             program.innerMain(args);
         }
-        catch (final Exception exception)
+        catch (final Throwable throwable)
         {
             if (Debug.IsDebug)
             {
                 System.err.println("Fatal error encountered.  Details:");
-                exception.printStackTrace(System.err);
+                throwable.printStackTrace(System.err);
             }
             else
             {
-                System.err.println("Fatal: " + exception.getClass().getName() + " encountered.  Details:");
-                System.err.println(exception.getMessage());
+                System.err.println("Fatal: " + throwable.getClass().getName() + " encountered.  Details:");
+                System.err.println(throwable.getMessage());
             }
-            logEvent(exception.getMessage(), "EventLogEntryType.Error");
+            logEvent(throwable.getMessage(), "EventLogEntryType.Error");
             // notice the lack of a new line; Git needs it that way
             System.out.print(AbortAuthenticationProcessResponse);
         }
@@ -485,11 +485,11 @@ public class Program
                 uninstall(processFactory);
                 configureGit(processFactory, configLocation);
             }
-            catch (IOException e)
+            catch (final IOException e)
             {
                 throw new Error(e);
             }
-            catch (InterruptedException e)
+            catch (final InterruptedException e)
             {
                 throw new Error(e);
             }
@@ -524,8 +524,9 @@ public class Program
         // escape spaces (if any) in paths to java and path to JAR
         // i.e. !/usr/bin/jre\ 1.6/bin/java -Ddebug=false -jar /home/example/with\ spaces/gcm.jar
         sb.append("!").append(escapeSpaces(pathToJava));
-        sb.append(" -Ddebug=").append(isDebug).append(" -jar ");
-        sb.append(escapeSpaces(pathToJar));
+        sb.append(" -Ddebug=").append(isDebug);
+        sb.append(" -Djava.net.useSystemProxies=true");
+        sb.append(" -jar ").append(escapeSpaces(pathToJar));
         final String gcmCommandLine = sb.toString();
 
         final String[] command =
@@ -573,11 +574,11 @@ public class Program
                 unconfigureGit(processFactory, configLocation);
             }
         }
-        catch (IOException e)
+        catch (final IOException e)
         {
             throw new Error(e);
         }
-        catch (InterruptedException e)
+        catch (final InterruptedException e)
         {
             throw new Error(e);
         }

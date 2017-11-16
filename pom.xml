@@ -5,7 +5,7 @@ Licensed under the MIT license. See License.txt in the project root. -->
 
   <groupId>com.microsoft.alm</groupId>
   <artifactId>git-credential-manager</artifactId>
-  <version>1.4.1-SNAPSHOT</version>
+  <version>1.6.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>Git Credential Manager for Mac and Linux</name>
@@ -511,7 +511,7 @@ Licensed under the MIT license. See License.txt in the project root. -->
     <dependency>
       <groupId>com.microsoft.alm</groupId>
       <artifactId>oauth2-useragent</artifactId>
-      <version>0.5.4</version>
+      <version>0.7.1</version>
     </dependency>
 
     <dependency>
